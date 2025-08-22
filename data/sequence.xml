@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="sequence_custom_assembly_order1" model="ir.sequence">
+            <field name="name"> custom_assembly_order seq.</field>
+            <field name="code">cost_assembly_product_seq</field>
+            <field name="prefix">PL/COST/</field>
+            <field name="padding">6</field>
+        </record>
+    </data>
+</odoo>

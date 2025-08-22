@@ -1,0 +1,22 @@
+<odoo>
+    <record id="view_export_components_wizard_form" model="ir.ui.view">
+        <field name="name">Export Components Wizard</field>
+        <field name="model">mrp.cost.collector.export.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Export Components">
+                <group>
+                    <field name="field_product"/>
+                    <field name="field_required"/>
+                    <field name="field_available"/>
+                    <field name="field_missing"/>
+                    <field name="field_cost"/>
+                    <field name="field_total"/>
+                </group>
+                <footer>
+                    <button string="Export" type="object" name="export_selected_fields" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

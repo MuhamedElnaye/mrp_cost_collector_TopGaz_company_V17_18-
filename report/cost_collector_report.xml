@@ -1,0 +1,107 @@
+<odoo>
+    <record id="cost_collector_report" model="ir.actions.report">
+        <field name="name">Print Cost Collector</field>
+        <field name="model">mrp.cost.collector</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_mrp_cost_collector"/>
+        <field name="binding_type">report</field>
+        <field name="report_name">mrp_cost_collector.cost_collector_report_template</field>
+    </record>
+    <template id="cost_collector_report_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="rec">
+                    <div>
+                        <span>
+                            <span style="font-size:25px;" class="my-2 fw-bold ">Finished Products :</span>
+                        </span>
+                        <t t-foreach="rec.finished_product_ids" t-as="product">
+                            <span style="font-size:20px;" class="my-2 fw-semibold me-2 text-danger">
+                                <t t-esc="product.display_name"/>
+                                ,
+                            </span>
+                        </t>
+                    </div>
+                    <div>
+                        <span style="font-size:25px;" class="my-2 fw-bold me-2">Global Quantity :</span>
+                        <span style="font-size:25px;font-weight:bold;" class="my-2 fw-semibold me-3 text-primary">
+                            <t t-esc="rec.global_qty"/>
+                        </span>
+                    </div>
+                    <di>
+                        <span style="font-size:25px;" class="my-2 fw-bold me-2">Total Cost Collector :</span>
+                        <span style="font-weight: bold;font-size: 25px;" class="my-2 fw-semibold me-3 text-primary">
+                            <t t-esc="'{:,.2f}'.format(rec.total_cost_all)"/>
+                            EGP
+                        </span>
+                    </di>
+
+                    <h1 class="text-center  my-4 fw-bold">Cost Collector Report</h1>
+                    <!-- table styling   -->
+                    <style>
+                        table {
+                        width:100%;
+                        border: 2px solid black;
+                        padding:8px;
+                        }
+                        table th{
+                        border: 2px solid black;
+                        padding:10px;
+                        background:#a3193c;
+                        color:white;
+                        font-weight: bold !important;
+                        font-size: 16px !important;
+                        }
+                        table td{
+                        border: 2px solid black;
+                        padding:8px;
+                        color:#313030;
+                        text-align:center;
+                        background:#fffff;
+                        }
+                    </style>
+                    <!--###### Create tables          -->
+                    <table>
+                        <thead>
+                            <th>Component Name</th>
+                            <th>Required Quantity</th>
+                            <th>Location</th>
+                            <th>Missing Quantity</th>
+                            <th>Purchase Cost</th>
+                            <th>Total Cost</th>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="rec.component_line_ids" t-as="line">
+                                <tr>
+                                    <td>
+                                        <t t-esc="line.product_id.display_name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="line.required_qty"/>
+                                    </td>
+                                    <t t-foreach="rec.location_ids" t-as="location">
+                                        <td>
+                                            <t t-esc="location.name"/>
+                                        </td>
+                                    </t>
+                                    <td>
+                                        <t t-esc="line.missing_qty"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="'{:,.2f}'.format( line.purchase_cost)"/>
+                                        EGP
+                                    </td>
+                                    <td>
+                                        <t t-esc="'{:,.2f}'.format( line.total_cost)"/>
+                                        EGP
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <br/>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

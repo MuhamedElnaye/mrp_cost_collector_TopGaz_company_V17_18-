@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_cost_collector,access_mrp_cost_collector,model_mrp_cost_collector,,1,1,1,1
+access_mrp_cost_collector_line,access_mrp_cost_collector_line,model_mrp_cost_collector_line,,1,1,1,1
+access_mrp_cost_collector_export_wizard,access_mrp_cost_collector_export_wizard,model_mrp_cost_collector_export_wizard,,1,1,1,1

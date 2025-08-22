@@ -1,0 +1,42 @@
+<odoo>
+    <!-- تعديل نموذج الشريك (Form View) -->
+    <record id="view_partner_form_inherit_balance" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.balance</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="balance" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- تعديل قائمة الشركاء (Tree View) -->
+    <record id="view_partner_list_inherit_balance" model="ir.ui.view">
+        <field name="name">res.partner.list.inherit.balance</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                    <field name="balance" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_kanban_inherit_balance" model="ir.ui.view">
+        <field name="name">res.partner.kanban.inherit.balance</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="arch" type="xml">
+            <!--            <xpath expr="//div[@class='mb-1']" position="after">-->
+            <xpath expr="//field[@name='country_id']" position="after">
+                <div class="o_kanban_partner_balance" style="color:#a3193c !important;">
+                    <!--                    <span t-field="record.balance" t-options="{'widget': 'monetary', 'display_currency': record.currency_id}"/>-->
+                    <field name="balance" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    EGP
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
